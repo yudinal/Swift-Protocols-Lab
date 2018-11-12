@@ -64,33 +64,6 @@ protocol Flyable {
 }
 </pre> 
 
-<details> 
- <summary>Solution</summary> 
- 
-```swift 
-protocol Bird {
-  var name: String { get }
-  var canFly: Bool { get }
-}
-
-protocol Flyable {
-  var airspeedVelocity: Double { get }
-}
-
-struct Penguin: Bird {
-  let name: String
-  let canFly: Bool
-}
-
-struct Eagle: Bird, Flyable {
-  let name: String
-  let canFly: Bool
-  let airspeedVelocity: Double
-}
-```
- 
-</details> 
-
 </br> </br> 
 
 <pre>
