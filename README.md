@@ -1,5 +1,5 @@
 
-## Protocol Oriented Programming
+## Protocols Lab
 
 ## Instructions for lab submission 
 
