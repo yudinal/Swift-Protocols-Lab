@@ -23,7 +23,7 @@ a. Create a `Human` class with two properties:
 
 Then create an initializer for the class and create two `Human` instances.
 
-b. Make the `Human` class adopt the CustomStringConvertible protocol. Then Print both of your previously initialized
+b. Make the `Human` class adopt the CustomStringConvertible protocol. Then print both of your previously initialized
 `Human` objects.
 
 c. Make the `Human` class adopt the Equatable protocol. Two instances of `Human` should be considered equal
