@@ -10,6 +10,11 @@
 1. Submit a Pull Request back to the assignment repo
 1. Paste a link of the pull request on Canvas and submit
 
+
+<br>
+
+> Questions adapted from [Swift student lessons: 4 - Tables and Persistence -> 1 - Protocols](https://developer.apple.com/go/?id=app-dev-swift-student)
+
 ## Question 1
 
 a. Create a `Human` class with two properties:
@@ -36,7 +41,7 @@ Create a new array called sortedPeople of type [`Human`] that is the people arra
 </br> </br>
 
 
-## Question 2.
+## Question 2
 
 a. Create a protocol called `Vehicle` with two requirements:
 - a nonsettable `numberOfWheels` property of type Int,
@@ -53,7 +58,7 @@ then call drive().
 </br> </br>
 
 
-## Question 3.
+## Question 3
 // Given the below two protocols, create a struct for penguin(a flightless bird) and an eagle.
 
 Give your structs some properties and have them conform to the appropriate protocols.
@@ -71,7 +76,7 @@ protocol Flyable {
 
 </br> </br>
 
-## Question 4.
+## Question 4
 
 a. Create a protocol called `Transformation`.  The protocol should specify a mutating method called transform
 
@@ -96,7 +101,7 @@ bruceBanner.transform()  // notHulk
 </br> </br>
 
 
-## Question 5.
+## Question 5
 
 a. Create a protocol called `Communication`
 
@@ -111,3 +116,46 @@ e. `message` should return a unique message for each animal when talk is called.
 f. Put an instance of each of your classes in an array.
 
 g. Iterate over the array and have them print their `message` property
+
+
+## Question 6
+
+The HeartRateReceiver class below represents a very simplified example of a class dedicated to receiving information from fitness tracking hardware with monitoring heart rate. The function startHeartRateMonitoringExample will generate random heart rates and assign them to currentHR, simulating how an instance of HeartRateReceiver may pick up on new heart rate readings at specific intervals.
+
+HeartRateViewController below is a view controller that will present the heart rate information to the user. Throughout the exercises below you'll use the delegate pattern to pass information from an instance of HeartRateReceiver to the view controller so that anytime new information is obtained it is presented to the user.
+
+```swift
+class HeartRateReceiver {
+    var currentHR: Int? {
+        didSet {
+            if let currentHR = currentHR {
+                print("The most recent heart rate reading is \(currentHR).")
+            } else {
+                print("Looks like we can't pick up a heart rate.")
+            }
+        }
+    }
+
+    func startHeartRateMonitoringExample() {
+        for _ in 1...10 {
+            let randomHR = 60 + Int.random(in: 0...15)
+            currentHR = randomHR
+            Thread.sleep(forTimeInterval: 2)
+        }
+    }
+}
+
+class HeartRateViewController: UIViewController {
+    var heartRateLabel: UILabel = UILabel()
+}
+```
+
+First, create an instance of HeartRateReceiver and call startHeartRateMonitoringExample. Notice that every two seconds currentHR get set and prints the new heart rate reading to the console.
+
+In a real app, printing to the console does not show information to the user. You need a way of passing information from the HeartRateReceiver to the HeartRateViewController. To do this, create a protocol called HeartRateReceiverDelegate that requires a method heartRateUpdated(to bpm:) where bpm is of type Int and represents the new rate as beats per minute. Since playgrounds read from top to bottom and the two previously declared classes will need to use this protocol, you'll need to declare this protocol above the declaration of HeartRateReceiver.
+
+Now make HeartRateViewController adopt the protocol you've just created. Inside the body of the required method you should set the text of heartRateLabel and print "The user has been shown a heart rate of <INSERT HEART RATE HERE>."
+
+Now add a property called delegate to HeartRateReceiver that is of type HeartRateReceiverDelegate?. In the didSet of currentHR where currentHR is successfully unwrapped, call heartRateUpdated(to bpm:) on the delegate property.
+
+Finally, return to the line of code just after you initialized an instance of HeartRateReceiver. Initialize an instance of HeartRateViewController. Then, set the delegate property of your instance of HeartRateReceiver to be the instance of HeartRateViewController that you just created. Wait for your code to compile and observe what is printed to the console. Every time that currentHR gets set, you should see both a printout of the most recent heart rate, and the print statement stating that the heart rate was shown to the user.
