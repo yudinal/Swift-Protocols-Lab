@@ -12,41 +12,41 @@
 
 ## Question 1
 
-a. Create a Human class with two properties: 
-- name of type String
-- age of type Int.
+a. Create a `Human` class with two properties:
+- `name` of type String
+- `age` of type Int.
 
-Then create an initializer for the class and create two Human instances.
+Then create an initializer for the class and create two `Human` instances.
 
-b. Make the Human class adopt the CustomStringConvertible protocol. Then Print both of your previously initialized
-Human objects.
+b. Make the `Human` class adopt the CustomStringConvertible protocol. Then Print both of your previously initialized
+`Human` objects.
 
-c. Make the Human class adopt the Equatable protocol. Two instances of Human should be considered equal
+c. Make the `Human` class adopt the Equatable protocol. Two instances of `Human` should be considered equal
 if their names and ages are identical to one another. Print the result of a boolean expression
-evaluating whether or not your two previously initialized Human objects are equal to eachother
+evaluating whether or not your two previously initialized `Human` objects are equal to eachother
 (using ==). Then print the result of a boolean expression evaluating whether or not your two
-previously initialized Human objects are not equal to eachother (using !=).
+previously initialized `Human` objects are not equal to eachother (using !=).
 
-d. Make the Human class adopt the Comparable protocol. One Human is greater than another Human if its age is bigger. Create another
-three instances of a Human, then create an array called people of type [Human] with all of the
-Human objects that you have initialized.
+d. Make the `Human` class adopt the `Comparable` protocol. One `Human` is greater than another `Human` if its age is bigger. Create another
+three instances of a `Human`, then create an array called people of type [`Human`] with all of the
+`Human` objects that you have initialized.
 
-Create a new array called sortedPeople of type [Human] that is the people array sorted by age.
+Create a new array called sortedPeople of type [`Human`] that is the people array sorted by age.
 
 </br> </br>
 
 
 ## Question 2.
 
-a. Create a protocol called Vehicle with two requirements:
-- a nonsettable numberOfWheels property of type Int,
+a. Create a protocol called `Vehicle` with two requirements:
+- a nonsettable `numberOfWheels` property of type Int,
 - a function called drive().
 
-b. Define a Car struct that implements the Vehicle protocol. numberOfWheels should return a value of 4,
-and drive() should print "Vroom, vroom!" Create an instance of Car, print its number of wheels,
+b. Define a `Car` struct that implements the `Vehicle` protocol. `numberOfWheels` should return a value of 4,
+and drive() should print "Vroom, vroom!" Create an instance of `Car`, print its number of wheels,
 then call drive().
 
-c. Define a Bike struct that implements the Vehicle protocol. numberOfWheels should return a value of 2,
+c. Define a Bike struct that implements the `Vehicle` protocol. `numberOfWheels` should return a value of 2,
 and drive() should print "Begin pedaling!". Create an instance of Bike, print its number of wheels,
 then call drive().
 
@@ -73,9 +73,9 @@ protocol Flyable {
 
 ## Question 4.
 
-a. Create a protocol called Transformation.  The protocol should specify a mutating method called transform
+a. Create a protocol called `Transformation`.  The protocol should specify a mutating method called transform
 
-b. Make an enum called SuperHero that conforms to Transformation with cases `notHulk` and `hulk`
+b. Make an enum called `SuperHero` that conforms to `Transformation` with cases `notHulk` and `hulk`
 
 c. Create an instance of it named `bruceBanner`. Make it so that when the transform function is called that bruceBanner turns from
 `.notHulk` to `.hulk.``
@@ -98,16 +98,16 @@ bruceBanner.transform()  // notHulk
 
 ## Question 5.
 
-a. Create a protocol called Communication
+a. Create a protocol called `Communication`
 
 b. Give it a property called `message`, of type String, and assign it an explicit getter.
 
 c. Create three Classes. `Cow`, `Dog`, `Cat`.
 
-d. Have your three classes conform to Communication
+d. Have your three classes conform to `Communication`
 
 e. `message` should return a unique message for each animal when talk is called.
 
-f. Put an instance of each of your Classes in an array.
+f. Put an instance of each of your classes in an array.
 
-g. Iterate over the array and have them print talk.
+g. Iterate over the array and have them print their `message` property
