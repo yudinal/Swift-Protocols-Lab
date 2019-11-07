@@ -22,22 +22,109 @@ a. Create a `Human` class with two properties:
 - `age` of type Int.
 
 Then create an initializer for the class and create two `Human` instances.
+```
+class Human {
+    var name: String = ""
+    var age: Int = 0
+}
+
+let man = Human()
+let woman = Human()
+man.name = "John"
+woman.age = 21
+```
 
 b. Make the `Human` class adopt the CustomStringConvertible protocol. Then print both of your previously initialized
 `Human` objects.
+```
+protocol Man: AnyObject {
+    
+}
+class Human: Man, CustomStringConvertible {
+    var description: String = ""
+    
+    var name: String = ""
+    var age: Int = 0
+    weak var delegate: Man?
+}
+
+let man = Human()
+let woman = Human()
+man.name = "John"
+woman.age = 21
+print(man.name)
+print(woman.age)
+
+```
 
 c. Make the `Human` class adopt the Equatable protocol. Two instances of `Human` should be considered equal
 if their names and ages are identical to one another. Print the result of a boolean expression
 evaluating whether or not your two previously initialized `Human` objects are equal to eachother
 (using ==). Then print the result of a boolean expression evaluating whether or not your two
 previously initialized `Human` objects are not equal to eachother (using !=).
+```
+protocol Man  {
+    var name: String { get set }
+    var age: Int { set get }
+}
+struct Human: Man, CustomStringConvertible, Equatable {
+    static func == (lhs: Human, rhs: Human) -> Bool {
+        return lhs.name == rhs.name
+    }
+    var description: String = ""
+    var name: String = ""
+    var age: Int = 0
+}
+var man = Human(name: "John", age: 30)
+var woman = Human(name: "Mary", age: 21)
 
+if man == woman {
+   print("The same name.")
+} else {
+    print("Different names")
+}
+if man != woman {
+   print("Name is different.")
+} else {
+    print("Names are the same.")
+}
+```
 d. Make the `Human` class adopt the `Comparable` protocol. One `Human` is greater than another `Human` if its age is bigger. Create another
 three instances of a `Human`, then create an array called people of type [`Human`] with all of the
 `Human` objects that you have initialized.
 
 Create a new array called sortedPeople of type [`Human`] that is the people array sorted by age.
+```
+class Human: CustomStringConvertible, Equatable, Comparable {
+    static func == (lhs: Human, rhs: Human) -> Bool {
+        return lhs.age == rhs.age
+    }
+    
+    static func < (lhs: Human, rhs: Human) -> Bool {
+        return lhs.age < rhs.age
+    }
+      
+    var description: String {
+        return "name is \(name) and age is \(age)"
+    }
+    var name: String
+    
+    var age: Int
+    
+    static var humans = [Human]()
+    init(name:String, age: Int) {
+        self.name = name
+        self.age = age
+        Human.humans.append(self)
+    }
+  
+}
+var man = Human(name: "John", age: 30)
+var woman = Human(name: "Mary", age: 21)
+var child = Human(name: "Mike", age: 11)
 
+var sortedPeople = Human.humans.sorted(by: {$0.age < $1.age})
+```
 </br> </br>
 
 
@@ -46,14 +133,54 @@ Create a new array called sortedPeople of type [`Human`] that is the people arra
 a. Create a protocol called `Vehicle` with two requirements:
 - a nonsettable `numberOfWheels` property of type Int,
 - a function called drive().
+```
+protocol Vehicle {
+    var numberOfWheels: Int { get }
+    func drive() 
+   }
+```
 
 b. Define a `Car` struct that implements the `Vehicle` protocol. `numberOfWheels` should return a value of 4,
 and drive() should print "Vroom, vroom!" Create an instance of `Car`, print its number of wheels,
 then call drive().
+```
+protocol Vehicle {
+    var numberOfWheels: Int { get }
+    func drive()
+   }
+struct Car: Vehicle {
+    var numberOfWheels: Int {
+        return 4
+    }
+    func drive() {
+        print("Vroom, vroom!")
+    }
+}
+var car = Car()
+print(car.numberOfWheels)
+car.drive()
+```
 
 c. Define a Bike struct that implements the `Vehicle` protocol. `numberOfWheels` should return a value of 2,
 and drive() should print "Begin pedaling!". Create an instance of Bike, print its number of wheels,
 then call drive().
+```
+protocol Vehicle {
+    var numberOfWheels: Int { get }
+    func drive()
+   }
+struct Bike: Vehicle {
+    var numberOfWheels: Int {
+        return 2
+    }
+    func drive() {
+        print("Begin pedaling!")
+    }
+}
+var bike = Bike()
+print(bike.numberOfWheels)
+bike.drive()
+```
 
 </br> </br>
 
@@ -71,6 +198,27 @@ protocol Bird {
 
 protocol Flyable {
  var airspeedVelocity: Double { get }
+}
+
+struct Peguin: Bird {
+    var name: String {
+        return "penguin"
+    }
+    var canFly: Bool {
+        return false
+    }
+}
+
+struct Eagle: Bird, Flyable {
+    var name: String {
+        return "eagle"
+    }
+    var canFly: Bool {
+        return true
+    }
+    var airspeedVelocity: Double {
+        return 15.00
+    }
 }
 ```
 
@@ -96,6 +244,27 @@ var bruceBanner = SuperHero.notHulk
 bruceBanner.transform() . // hulk
 
 bruceBanner.transform()  // notHulk
+
+Answer:
+protocol Transformation {
+    mutating func transform()
+}
+
+enum SuperHero: Transformation {
+   case notHulk
+    case hulk
+    mutating func transform() {
+        if self == .hulk {
+            self = .notHulk
+        } else {
+            self = .hulk
+        }
+    }
+}
+var bruceBanner = SuperHero.hulk
+
+bruceBanner.transform()
+
 ```
 
 </br> </br>
